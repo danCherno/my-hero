@@ -25,8 +25,9 @@
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
-    "express": "^4.21.1",
+    "env": "^0.0.2",
+    "express": "^4.21.2",
     "jwt-simple": "^0.5.6",
-    "mongoose": "^8.8.1"
+    "mongoose": "^8.9.7"
   }
 }
