@@ -15,9 +15,9 @@ const Login: React.FC = () => {
         <form className={styles.loginPage__form}>
           <input
             type="text"
-            name="username"
+            name="userName"
             placeholder="Username"
-            value={formData.username}
+            value={formData.userName}
             onChange={handleInputChange}
             className={styles.loginPage__formInput}
           />

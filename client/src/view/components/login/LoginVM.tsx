@@ -3,14 +3,14 @@ import { useState } from "react";
 
 // Define the interface for form data
 interface LoginFormData {
-  username: string;
+  userName: string;
   password: string;
 }
 
 // Custom hook for managing login and registration logic
 const useLoginViewModel = () => {
   const [formData, setFormData] = useState<LoginFormData>({
-    username: "",
+    userName: "",
     password: "",
   });
 

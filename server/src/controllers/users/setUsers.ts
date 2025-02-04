@@ -1,16 +1,16 @@
 import { UserModel } from "../../model/users/UserModel";
 import jwt from 'jwt-simple';
 import bcrypt from 'bcrypt';
-const saltRounds = process.env.SALT_BCRYPT || 10;
+const saltRounds = parseInt(process.env.SALT_ROUNDS || "10", 10);
 
 
 export const secret = process.env.SECRET_JWT || "secret"
 
 export async function register(req: any, res: any) {
     try {
-        const { name, password } = req.body;
+        const { userName, password } = req.body;
 
-        if (!name || !password) {
+        if (!userName || !password) {
             throw new Error('Please fill all fields');
         }
 
@@ -20,7 +20,7 @@ export async function register(req: any, res: any) {
 
         //send request to DB
         await UserModel.create({
-            name,
+            userName,
             password: hashedPassword,
         })
 
@@ -34,12 +34,12 @@ export async function register(req: any, res: any) {
 
 export async function login(req: any, res: any) {
     try {
-        const { name, password } = req.body;
+        const { userName, password } = req.body;
 
-        if (!name || !password) throw new Error("Please fill all fields");
+        if (!userName || !password) throw new Error("Please fill all fields");
 
         // Find user by email
-        const user = await UserModel.findOne({ name });
+        const user = await UserModel.findOne({ userName });
         if (!user) {
             return res.status(400).send({ error: "Invalid email or password" });
         }
