@@ -1,0 +1,32 @@
+import express from 'express'
+import mongoose from "mongoose";
+import cookieParser from 'cookie-parser'; 
+import 'dotenv/config';
+import cors from 'cors';
+
+const app = express()
+const port = 3000;
+
+app.use(cors());
+app.use(express.json());
+app.use(express.static('public'));
+app.use(cookieParser());
+
+//DB
+const dbUrl = process.env.DB_URL;
+const database = 'my-hero';
+
+//connection
+mongoose.connect(`${dbUrl}/${database}`).then(()=>{
+    console.info("DB connected")
+}).catch((err)=>{
+    console.error(err)
+});
+
+//routes
+import usersRouter from './routes/users/userRoutes';
+app.use("/api/users", usersRouter);
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
